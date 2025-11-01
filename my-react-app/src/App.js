@@ -9,7 +9,8 @@ function App() {
     const [statuses, setStatuses] = useState([]);
     const [tasks, setTasks] = useState([]);
 
-    const priorities = [1, 2, 3, 4, 5];
+
+
 
     const getStatuses = () => {
 
@@ -45,10 +46,38 @@ function App() {
             });
     }
 
+    const movePriority = (id, priority) => {
+        axios.patch(`https://expressjs-server.vercel.app/tasks/${id}`, {priority: priority})
+            .then(function (response) {
+                // handle success
+               getTasks();
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }
+
+    const deleteTask = (id) => {
+        axios.delete(`https://expressjs-server.vercel.app/tasks/${id}`)
+            .then(function (response) {
+                // handle success
+                getTasks();
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    }
+
+
 
     useEffect(() => {
         getStatuses();
         getTasks();
+
 
     },[])
 
@@ -67,6 +96,8 @@ function App() {
                             key={status._id}
                             status={status}
                             tasks={tasks}
+                            movePriority={movePriority}
+                            deleteTask={deleteTask}
 
 
                         />
