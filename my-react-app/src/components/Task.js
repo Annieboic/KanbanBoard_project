@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Task = ({task}) => {
+const Task = ({task,movePriority,deleteTask}) => {
     return (
         <div className="card">
             <div className="card-body">
@@ -8,10 +8,16 @@ const Task = ({task}) => {
                 <h6 className="d-flex justify-content-center gap-3 align-items-center
                 card-subtitle mb-2 text-body-secondary">
 
-                    <button type="button" className="btn btn-light">↑</button>
+                    <button
+                        disabled={task.priority <= 0}
+                        onClick={() => movePriority(task._id, task.priority - 1)}
+                        type="button" className="btn btn-light">↑</button>
                     <span>Priority: {task.priority}</span>
 
-                    <button type="button" className="btn btn-light">↓</button>
+                    <button
+                        disabled={task.priority >= 10}
+                        onClick={() => movePriority(task._id, task.priority + 1)}
+                        type="button" className="btn btn-light">↓</button>
 
 
                 </h6>
@@ -24,7 +30,9 @@ const Task = ({task}) => {
 
                 <div className="d-flex justify-content-around gap-2 mt-3">
                     <button type="button" className="btn btn-warning">Edit</button>
-                    <button type="button" className="btn btn-danger">Delete</button>
+                    <button
+                        onClick={()=>deleteTask(task._id)}
+                        type="button" className="btn btn-danger">Delete</button>
                 </div>
 
 
