@@ -1,7 +1,7 @@
 import React from 'react';
 import Task from "./Task";
 
-const Status = ({status,tasks,movePriority,deleteTask}) => {
+const Status = ({status,tasks,movePriority,deleteTask, priority, statuses, editTask,moveTask,setTasks}) => {
     return (
 
             <div className="col">
@@ -18,6 +18,12 @@ const Status = ({status,tasks,movePriority,deleteTask}) => {
                     task={task}
                     movePriority={movePriority}
                     deleteTask={deleteTask}
+                    priority={priority}
+                    editTask={editTask}
+                    statuses={statuses}
+                    moveTask={moveTask}
+                    setTasks={setTasks}
+
 
 
                 />
